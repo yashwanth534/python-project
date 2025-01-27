@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import openai
+import os
 
 app = Flask(__name__)
 
@@ -34,4 +35,5 @@ def chat():
         return jsonify({"reply": "Sorry, an unexpected error occurred. Please try again later."})
 
 if __name__ == '__main__':
-    app.run(debug=True)  # Start Flask server in debug mode
+    port = int(os.environ.get('PORT', 5000))  # Use the PORT provided by the hosting platform
+    app.run(debug=True, host='0.0.0.0', port=port)
